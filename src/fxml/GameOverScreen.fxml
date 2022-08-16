@@ -4,6 +4,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
@@ -13,12 +14,13 @@
             <Image url="@../images/bg1.jpg" />
          </image>
       </ImageView>
+      <VBox layoutX="208.0" layoutY="253.0" prefHeight="230.0" prefWidth="382.0" />
       <Button alignment="CENTER" layoutX="217.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#switchToPlay" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="83.0" prefWidth="370.0" style="-fx-background-color: transparent; -fx-border-color: #7FFFD4; -fx-border-width: 2;" text="Play Again" textFill="#fad307">
          <font>
             <Font name="Lucida Console" size="40.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="219.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#Exit" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="83.0" prefWidth="369.0" style="-fx-background-color: transparent; -fx-border-color: #7FFFD4; -fx-border-width: 2;" text="Exit" textFill="#fad307">
+      <Button alignment="CENTER" layoutX="217.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#Exit" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="83.0" prefWidth="370.0" style="-fx-background-color: transparent; -fx-border-color: #7FFFD4; -fx-border-width: 2;" text="Exit" textFill="#fad307">
          <font>
             <Font name="Lucida Console" size="40.0" />
          </font>

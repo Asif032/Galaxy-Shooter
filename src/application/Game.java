@@ -18,12 +18,14 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class Game {
   
-//  @FXML
-//  Label result;
+  @FXML
+  Label result;
   
   private AnchorPane root;
   Scene scene;
@@ -68,10 +70,8 @@ public class Game {
         if (!pause && !win && !gameOver) {
           update();
         } else if (win || gameOver) {
-//          pause = true;
           stop();
           String message = "";
-          Controller c = new Controller();
           if (win) {
             message = "You Win!";
           } else {
@@ -83,6 +83,13 @@ public class Game {
             // TODO Auto-generated catch block
             e.printStackTrace();
           }
+//          result.setText(message);
+          Label l = new Label(message);
+          l.setLayoutX(245);
+          l.setLayoutY(175);
+          l.setFont(new Font("Lucida Console", 60));
+          l.setTextFill(Color.RED);
+          root.getChildren().add(l);
           scene = new Scene(root);
 //          result.setText(message);
           stage.setScene(scene);
@@ -109,7 +116,7 @@ public class Game {
   }
   public void update() {
     
-    t += 0.032 * level;
+    t += 0.032 * (level + 1);
     enemyBullets = 0;
     
     sprites().forEach(s -> {
@@ -166,14 +173,14 @@ public class Game {
           }
           s.tx = (s.tx + 1) % 80;
           double x = 0;
-          if (sprites().size() > 20) {
+          if (enemyCount > 20) {
             x++;
           }
-          if (sprites().size() <= 5) {
+          if (enemyCount <= 5) {
             x--;
           }
           if (t > 2 - Math.random() * x) {
-            if (Math.random() < 0.6 * level) {
+            if (Math.random() < 0.6 * (level + 1)) {
               shoot(s);
             }
             t = 0;
