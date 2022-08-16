@@ -20,9 +20,9 @@ public class Images {
   
   static final Image BACK_IMG[] = {
       new Image("/images/bg1.jpg"),
-      new Image("/images/bg2.jpg"),
+      new Image("/images/bg5.jpg"),
       new Image("/images/bg3.jpg"),
-      new Image("/images/bg5.jpg")
+      new Image("/images/bg2.jpg")
     };
   
   static final Image BULLET_IMG[] = {
@@ -32,6 +32,8 @@ public class Images {
     };
   
   static final Image ICON_IMG = new Image("/images/icon.png");
+  
+  static final Image EXPLOSION_IMG = new Image("/images/explosion.png");
 
   
 }
