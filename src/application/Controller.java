@@ -21,8 +21,6 @@ public class Controller {
     root = FXMLLoader.load(getClass().getResource("/fxml/MainMenu.fxml"));
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     scene = new Scene(root);
-    String css = getClass().getResource("application.css").toExternalForm();
-    scene.getStylesheets().add(css);
     stage.setScene(scene);
     stage.show();
   }
@@ -31,9 +29,6 @@ public class Controller {
     root = FXMLLoader.load(getClass().getResource("/fxml/Play.fxml"));
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     scene = new Scene(root);
-    ((Node) event.getSource()).setEffect(new DropShadow());
-    String css = getClass().getResource("application.css").toExternalForm();
-    scene.getStylesheets().add(css);
     stage.setScene(scene);
     stage.show();
   }
@@ -41,9 +36,7 @@ public class Controller {
   public void switchToOptions(MouseEvent event) throws Exception {
     root = FXMLLoader.load(getClass().getResource("/fxml/Options.fxml"));
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    Scene scene = new Scene(root);
-    String css = getClass().getResource("application.css").toExternalForm();
-    scene.getStylesheets().add(css);
+    scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
   }
@@ -52,20 +45,27 @@ public class Controller {
     root = FXMLLoader.load(getClass().getResource("/fxml/Help.fxml"));
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     scene = new Scene(root);
-    String css = getClass().getResource("application.css").toExternalForm();
-    scene.getStylesheets().add(css);
     stage.setScene(scene);
     stage.show();
   }
   
   public void switchToLevel1(MouseEvent event) throws Exception {
-    root = FXMLLoader.load(getClass().getResource("/fxml/Level1.fxml"));
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    scene = new Scene(root);
-    String css = getClass().getResource("application.css").toExternalForm();
-    scene.getStylesheets().add(css);
-    stage.setScene(scene);
-    stage.show();
+    switchToGameScreen(stage, 0);
+  }
+  
+  public void switchToLevel2(MouseEvent event) throws Exception {
+    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    switchToGameScreen(stage, 1);
+  }
+  
+  public void switchToLevel3(MouseEvent event) throws Exception {
+    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    switchToGameScreen(stage, 2);
+  }
+  
+  public void switchToGameScreen(Stage st, int level) throws Exception {
+    Game game = new Game(st, level);
   }
   
   public void mouseEntered(MouseEvent event) throws Exception {
