@@ -12,7 +12,7 @@ public class Images {
   
   static final Image ENEMY_IMG[] = {
     new Image("/images/enemy1.png"),
-    new Image("/images/enemy2.png"),
+    new Image("/images/enemy12.png"),
     new Image("/images/enemy3.png"),
     new Image("/images/enemy4.png"),
     new Image("/images/enemy5.png")
@@ -20,9 +20,9 @@ public class Images {
   
   static final Image BACK_IMG[] = {
       new Image("/images/bg1.jpg"),
-      new Image("/images/bg5.jpg"),
-      new Image("/images/bg3.jpg"),
-      new Image("/images/bg2.jpg")
+      new Image("/images/bg7.jpg"),
+      new Image("/images/bg8.jpg"),
+      new Image("/images/bg6.jpg")
     };
   
   static final Image BULLET_IMG[] = {

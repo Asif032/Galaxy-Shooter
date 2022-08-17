@@ -14,16 +14,18 @@
             <Image url="@../images/bg1.jpg" />
          </image>
       </ImageView>
-      <VBox layoutX="208.0" layoutY="253.0" prefHeight="230.0" prefWidth="382.0" />
-      <Button alignment="CENTER" layoutX="217.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#switchToPlay" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="83.0" prefWidth="370.0" style="-fx-background-color: transparent; -fx-border-color: #7FFFD4; -fx-border-width: 2;" text="Play Again" textFill="#fad307">
-         <font>
-            <Font name="Lucida Console" size="40.0" />
-         </font>
-      </Button>
-      <Button alignment="CENTER" layoutX="217.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#Exit" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="83.0" prefWidth="370.0" style="-fx-background-color: transparent; -fx-border-color: #7FFFD4; -fx-border-width: 2;" text="Exit" textFill="#fad307">
-         <font>
-            <Font name="Lucida Console" size="40.0" />
-         </font>
-      </Button>
+      <VBox layoutX="50.0" layoutY="165.0" prefHeight="150.0" prefWidth="313.0">
+         <children>
+            <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#switchToPlay" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="83.0" prefWidth="370.0" style="-fx-background-color: transparent; -fx-border-color: #7FFFD4; -fx-border-width: 2;" text="Play Again" textFill="#fad307">
+               <font>
+                  <Font name="Lucida Console" size="40.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#Exit" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="83.0" prefWidth="370.0" style="-fx-background-color: transparent; -fx-border-color: #7FFFD4; -fx-border-width: 2;" text="Exit" textFill="#fad307">
+               <font>
+                  <Font name="Lucida Console" size="40.0" />
+               </font>
+            </Button>
+         </children></VBox>
    </children>
 </AnchorPane>

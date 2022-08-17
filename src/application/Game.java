@@ -24,12 +24,10 @@ import javafx.stage.Stage;
 
 public class Game {
   
-  @FXML
-  Label result;
-  
   private AnchorPane root;
   Scene scene;
   Stage stage;
+  
   private double t = 0;
   boolean gameOver = false;
   int level;
@@ -37,18 +35,21 @@ public class Game {
   int enemyCount = 44;
   int enemyBullets = 0;
   boolean pause = false;
+  int score = 0;
   
   private static final int HEIGHT = 600;
   private static final int WIDTH = 800;
   private static final int PLAYER_SIZE = 50;
-  private Sprite player = new Sprite(WIDTH / 2, HEIGHT - PLAYER_SIZE, PLAYER_SIZE, PLAYER_SIZE, "player", Color.BLUE);
+  private Sprite player;
   
   public Game(Stage stage, int level) {
     this.level = level;
     root = new AnchorPane();
     this.stage = stage;
     
-    BackgroundImage bImg = new BackgroundImage(Images.BACK_IMG[level], BackgroundRepeat.NO_REPEAT,
+    player = new Sprite(WIDTH / 2, HEIGHT - PLAYER_SIZE, PLAYER_SIZE, PLAYER_SIZE, "player", Color.BLUE);
+    
+    BackgroundImage bImg = new BackgroundImage(Images.BACK_IMG[level + 1], BackgroundRepeat.NO_REPEAT,
         BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
     Background background = new Background(bImg);
     root.setBackground(background);
@@ -59,6 +60,8 @@ public class Game {
     run();
   }
   
+  
+  // 
   private Parent createContent() {
     root.setPrefSize(WIDTH, HEIGHT);
     root.getChildren().add(player);
@@ -71,27 +74,20 @@ public class Game {
           update();
         } else if (win || gameOver) {
           stop();
-          String message = "";
-          if (win) {
-            message = "You Win!";
-          } else {
-            message = "You lose!";
-          }
+          String message = "YOU";
+          message += win ? " WIN!" : " LOSE!";
           try {
             root = FXMLLoader.load(getClass().getResource("/fxml/GameOverScreen.fxml"));
-          } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-          }
-//          result.setText(message);
+          } catch (IOException e) {}
+          
           Label l = new Label(message);
-          l.setLayoutX(245);
-          l.setLayoutY(175);
-          l.setFont(new Font("Lucida Console", 60));
-          l.setTextFill(Color.RED);
+          l.setLayoutX(400);
+          l.setLayoutY(210);
+          l.setFont(new Font("Lucida Console", 55));
+          l.setTextFill(Color.ANTIQUEWHITE);
           root.getChildren().add(l);
+          
           scene = new Scene(root);
-//          result.setText(message);
           stage.setScene(scene);
           stage.show();
         }
@@ -106,7 +102,7 @@ public class Game {
   
   private void nextLevel() {
     for (int i = 0; i < 44; i++) {
-      Sprite s = new Sprite(50 + i % 11 * 70, i / 11 * 50 + 20, PLAYER_SIZE - 5, PLAYER_SIZE - 5, "enemy", Color.RED);
+      Sprite s = new Sprite(50 + 10 * level + i % 11 * 70, i / 11 * 50 + 20, PLAYER_SIZE - 5, PLAYER_SIZE - 5, "enemy", Color.RED);
       root.getChildren().add(s);
     }
   }
@@ -116,7 +112,8 @@ public class Game {
   }
   public void update() {
     
-    t += 0.032 * (level + 1);
+    int y = level == 0 ? 2 : level + 1;
+    t += 0.032 * y;
     enemyBullets = 0;
     
     sprites().forEach(s -> {
@@ -139,25 +136,27 @@ public class Game {
             gameOver = true;
             s.dead = true;
           }
+          
           if (s.getTranslateY() > HEIGHT) {
             s.dead = true;
           }
           break;
           
-        case "playerbullet": {
+        case "playerbullet":
           s.moveUp();
           sprites().stream().filter(e -> e.type.equals("enemy")).forEach(enemy -> {
             if (s.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
               enemy.dead = true;
               s.dead = true;
               enemyCount--;
+              score += 25 * level * 2 / 3;
             }
           });
+          
           if (s.getTranslateY() < 0) {
             s.dead = true;
           }
           break;
-        }
         
         case "enemy":
           if (s.getBoundsInParent().intersects(player.getBoundsInParent())) {
@@ -165,29 +164,29 @@ public class Game {
             gameOver = true;
             s.dead = true;
             enemyCount--;
+            score += 25 * level * 2 / 3;
           }
+          
           if (s.tx < 40) {
             s.moveLeft();
           } else {
             s.moveRight();
           }
           s.tx = (s.tx + 1) % 80;
+          
           double x = 0;
-          if (enemyCount > 20) {
-            x++;
+          if (enemyCount <= 15 + 5 * level) {
+            x = 1;
           }
-          if (enemyCount <= 5) {
-            x--;
-          }
-          if (t > 2 - Math.random() * x) {
-            if (Math.random() < 0.6 * (level + 1)) {
+          if (t > 2 - Math.random() + x) {
+            if (Math.random() < 0.6 * ((level + 1) / 2.0)) {
               shoot(s);
             }
             t = 0;
           }
           break;
           
-        case "player": {
+        case "player":
           if (s.moveLeft && s.getTranslateX() > 0) {
             s.moveLeft();
           } else if (s.moveRight && s.getTranslateX() < WIDTH - PLAYER_SIZE) {
@@ -198,7 +197,6 @@ public class Game {
             s.moveUp();
           }
           break;
-        }
       }
     });
     
@@ -221,24 +219,24 @@ public class Game {
     boolean dead = false;
     final String type;
     boolean moveLeft, moveRight, moveUp, moveDown;
-    int speed, originX, tx;
+    int tx;
+    double speed;
     
     Sprite(int x, int y, int w, int h, String type, Color color) {
       super(w, h, color);
-      originX = x;
       this.type = type;
       
       if (type.equals("player")) {
-        setFill(new ImagePattern(Images.PLAYER_IMG[level]));
+        setFill(new ImagePattern(Images.PLAYER_IMG[0]));
         speed = 5;
       } else if (type.equals("enemy")) {
         setFill(new ImagePattern(Images.ENEMY_IMG[level]));
-        speed = 1;
+        speed = level > 0 ? 2 : 1;
       } else if (type.equals("enemybullet")) {
         this.setFill(new ImagePattern(Images.BULLET_IMG[1]));
-        speed = 2;
+        speed = level > 0 ? 2 : 1;
       } else {
-        this.setFill(new ImagePattern(Images.BULLET_IMG[0]));
+        this.setFill(new ImagePattern(Images.BULLET_IMG[2]));
         speed = 6;
       }
       
