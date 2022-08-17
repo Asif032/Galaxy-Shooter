@@ -255,9 +255,11 @@ public class Game {
       } else if (type.equals("enemy")) {
         setFill(new ImagePattern(Images.ENEMY_IMG[level]));
         speed = level > 0 ? 2 : 1;
+//        speed = level + 1;
       } else if (type.equals("enemybullet")) {
         this.setFill(new ImagePattern(Images.BULLET_IMG[1]));
         speed = level > 0 ? 2 : 1;
+//        speed = level + 1;
       } else {
         this.setFill(new ImagePattern(Images.BULLET_IMG[2]));
         speed = 6;

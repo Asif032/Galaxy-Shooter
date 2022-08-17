@@ -20,7 +20,7 @@ public class Images {
   
   static final Image BACK_IMG[] = {
       new Image("/images/bg1.jpg"),
-      new Image("/images/bg7.jpg"),
+      new Image("/images/bg3.jpg"),
       new Image("/images/bg8.jpg"),
       new Image("/images/bg6.jpg")
     };
@@ -32,9 +32,6 @@ public class Images {
     };
   
   static final Image ICON_IMG = new Image("/images/icon.png");
-  
-  static final Image EXPLOSION_IMG = new Image("/images/explosion.png");
 
-  
 }
 
