@@ -17,12 +17,12 @@
       </ImageView>
       <VBox layoutX="23.0" layoutY="135.0" prefHeight="200.0" prefWidth="313.0" style="-fx-border-color: #7FFFD4;">
          <children>
-            <CheckBox mnemonicParsing="false" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="62.0" prefWidth="350.0" style="-fx-border-color: #7FFFD4; -fx-border-width: 2;" text="Music" textFill="#fad307">
+            <CheckBox fx:id="musicBox" mnemonicParsing="false" onAction="#playMusic" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="62.0" prefWidth="350.0" style="-fx-border-color: #7FFFD4; -fx-border-width: 2;" text="Music" textFill="#fad307">
                <font>
                   <Font name="Lucida Console" size="40.0" />
                </font>
             </CheckBox>
-            <CheckBox mnemonicParsing="false" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="63.0" prefWidth="350.0" style="-fx-border-color: #7FFFD4; -fx-border-width: 2;" text="Sounds" textFill="#fad307">
+            <CheckBox fx:id="soundsBox" mnemonicParsing="false" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="63.0" prefWidth="350.0" style="-fx-border-color: #7FFFD4; -fx-border-width: 2;" text="Sounds" textFill="#fad307">
                <font>
                   <Font name="Lucida Console" size="40.0" />
                </font>

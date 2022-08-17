@@ -1,5 +1,6 @@
 package application;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,8 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -36,6 +39,10 @@ public class Game {
   int enemyBullets = 0;
   boolean pause = false;
   int score = 0;
+  boolean bgMusic = true;
+  
+  MediaPlayer mediaPlayer;
+  Media media;
   
   private static final int HEIGHT = 600;
   private static final int WIDTH = 800;
@@ -57,11 +64,14 @@ public class Game {
     scene = new Scene(createContent());
     stage.setScene(scene);
     stage.show();
+    File f = new File("src/sounds/music.wav");
+    media = new Media(f.toURI().toString());
+    mediaPlayer = new MediaPlayer(media);
+    mediaPlayer.play();
     run();
   }
   
   
-  // 
   private Parent createContent() {
     root.setPrefSize(WIDTH, HEIGHT);
     root.getChildren().add(player);
@@ -74,6 +84,7 @@ public class Game {
           update();
         } else if (win || gameOver) {
           stop();
+          mediaPlayer.stop();
           String message = "YOU";
           message += win ? " WIN!" : " LOSE!";
           try {
@@ -110,21 +121,21 @@ public class Game {
   private List<Sprite> sprites() {
     return root.getChildren().stream().map(n -> (Sprite) n).collect(Collectors.toList());
   }
+  
+  public void shoot(Sprite who) {
+    String type = who.type;
+    int h = 10;
+    int w = type.equals("player") ? 20 : 10;
+    Sprite s = new Sprite((int) who.getTranslateX() + 20, (int) who.getTranslateY(), h, w, type + "bullet", Color.BLACK);
+    root.getChildren().add(s);
+  }
+  
   public void update() {
+    
+    mediaPlayer.play();
     
     int y = level == 0 ? 2 : level + 1;
     t += 0.032 * y;
-    enemyBullets = 0;
-    
-    sprites().forEach(s -> {
-      if (s.type.equals("enemybullet")) {
-        enemyBullets++;
-      }
-    });
-    
-    if (enemyCount == 0 && player.dead == false && enemyBullets == 0) {
-      win = true;
-    }
     
     sprites().forEach(s -> {
       switch(s.type) {
@@ -149,7 +160,6 @@ public class Game {
               enemy.dead = true;
               s.dead = true;
               enemyCount--;
-              score += 25 * level * 2 / 3;
             }
           });
           
@@ -164,7 +174,6 @@ public class Game {
             gameOver = true;
             s.dead = true;
             enemyCount--;
-            score += 25 * level * 2 / 3;
           }
           
           if (s.tx < 40) {
@@ -178,6 +187,16 @@ public class Game {
           if (enemyCount <= 15 + 5 * level) {
             x = 1;
           }
+          if (enemyCount <= 5) {
+            x = 2;
+          }
+          if (enemyCount == 1) {
+            x = 4;
+          }
+          if (enemyCount <= 10 && level == 2) {
+            x = 4;
+          }
+          
           if (t > 2 - Math.random() + x) {
             if (Math.random() < 0.6 * ((level + 1) / 2.0)) {
               shoot(s);
@@ -205,14 +224,18 @@ public class Game {
       return s.dead;
     });
     
-  }
-  
-  public void shoot(Sprite who) {
-    String type = who.type;
-    int h = 10;
-    int w = type.equals("player") ? 20 : 10;
-    Sprite s = new Sprite((int) who.getTranslateX() + 20, (int) who.getTranslateY(), h, w, type + "bullet", Color.BLACK);
-    root.getChildren().add(s);
+    enemyBullets = 0;
+    
+    sprites().forEach(s -> {
+      if (s.type.equals("enemybullet")) {
+        enemyBullets++;
+      }
+    });
+    
+    if (enemyCount == 0 && player.dead == false && enemyBullets == 0) {
+      win = true;
+    }
+    
   }
   
   class Sprite extends Rectangle {

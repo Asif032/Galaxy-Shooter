@@ -9,21 +9,21 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#switchToMainMenu" onMouseClicked="#switchToMainMenu" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="366.0" fitWidth="392.0" layoutX="213.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/icon.png" />
          </image>
       </ImageView>
-      <VBox layoutX="580.0" layoutY="141.0" prefHeight="275.0" prefWidth="212.0">
+      <VBox layoutX="238.0" layoutY="366.0" prefHeight="174.0" prefWidth="323.0">
          <children>
-            <Label alignment="BOTTOM_CENTER" prefHeight="102.0" prefWidth="219.0" text="Galaxy" textFill="#0ce6e8">
+            <Label alignment="BOTTOM_CENTER" prefHeight="87.0" prefWidth="323.0" text="Galaxy" textFill="#0ce6e8">
                <font>
-                  <Font name="Lucida Console" size="45.0" />
+                  <Font name="Lucida Console" size="75.0" />
                </font>
             </Label>
-            <Label alignment="TOP_CENTER" prefHeight="102.0" prefWidth="219.0" text="Shooter" textFill="#0ce6e8">
+            <Label alignment="TOP_CENTER" prefHeight="95.0" prefWidth="325.0" text="Shooter" textFill="#0ce6e8">
                <font>
-                  <Font name="Lucida Console" size="45.0" />
+                  <Font name="Lucida Console" size="75.0" />
                </font>
             </Label>
          </children>
