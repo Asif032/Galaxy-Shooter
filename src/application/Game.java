@@ -9,7 +9,9 @@ import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -26,6 +28,9 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class Game {
+  
+  @FXML
+  CheckBox musicBox;
   
   private AnchorPane root;
   Scene scene;
@@ -61,15 +66,22 @@ public class Game {
     Background background = new Background(bImg);
     root.setBackground(background);
     
-    scene = new Scene(createContent());
-    stage.setScene(scene);
-    stage.show();
     File f = new File("src/sounds/music.wav");
     media = new Media(f.toURI().toString());
     mediaPlayer = new MediaPlayer(media);
     mediaPlayer.play();
+    
+    scene = new Scene(createContent());
+    stage.setScene(scene);
+    stage.show();
     run();
   }
+  
+//  public void backToGame(MouseEvent event) {
+//    scene = new Scene(root);
+//    stage.setScene(scene);
+//    stage.show();
+//  }
   
   
   private Parent createContent() {
@@ -84,7 +96,7 @@ public class Game {
           update();
         } else if (win || gameOver) {
           stop();
-          mediaPlayer.stop();
+//          mediaPlayer.stop();
           String message = "YOU";
           message += win ? " WIN!" : " LOSE!";
           try {
@@ -132,7 +144,9 @@ public class Game {
   
   public void update() {
     
-    mediaPlayer.play();
+    if (bgMusic) {
+      mediaPlayer.play();
+    }
     
     int y = level == 0 ? 2 : level + 1;
     t += 0.032 * y;
@@ -198,7 +212,8 @@ public class Game {
           }
           
           if (t > 2 - Math.random() + x) {
-            if (Math.random() < 0.6 * ((level + 1) / 2.0)) {
+            double p = 0.3 * (level + 1);
+            if (Math.random() < p) {
               shoot(s);
             }
             t = 0;
@@ -321,6 +336,18 @@ public class Game {
         
       case P:
         pause = true;
+//        try {
+//          Parent p = FXMLLoader.load(getClass().getResource("/fxml/PauseMenu.fxml"));
+//          scene = new Scene(p);
+//          stage.setScene(scene);
+//          stage.show();
+//          bgMusic = false;
+//          if (musicBox.isSelected()) {
+//            bgMusic = true;
+//          }
+//        } catch (IOException e1) {
+//          System.out.println(e1);
+//        }
         break;
         
       case R:
