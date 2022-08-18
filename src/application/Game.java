@@ -96,7 +96,7 @@ public class Game {
           update();
         } else if (win || gameOver) {
           stop();
-//          mediaPlayer.stop();
+          mediaPlayer.stop();
           String message = "YOU";
           message += win ? " WIN!" : " LOSE!";
           try {
@@ -112,7 +112,6 @@ public class Game {
           
           scene = new Scene(root);
           stage.setScene(scene);
-          stage.show();
         }
       }
       
@@ -190,6 +189,7 @@ public class Game {
             enemyCount--;
           }
           
+          // enemy sidewise movement
           if (s.tx < 40) {
             s.moveLeft();
           } else {
@@ -197,6 +197,8 @@ public class Game {
           }
           s.tx = (s.tx + 1) % 80;
           
+          
+          // adjusting probability of shooting if enemy number decreases
           double x = 0;
           if (enemyCount <= 15 + 5 * level) {
             x = 1;

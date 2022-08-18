@@ -28,5 +28,10 @@
             </Label>
          </children>
       </VBox>
+      <Label alignment="CENTER" layoutX="257.0" layoutY="540.0" prefHeight="48.0" prefWidth="278.0" text="Click to enter main menu" textFill="WHITE">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
