@@ -1,0 +1,5 @@
+Firstly you need to have jdk installed in your local machine and set it as path variable.
+Download the jar file and go to the file path from cmd.
+type java --module-path "javaFX library path(for example : C:\Java\javafx-sdk-18.0.1\lib)"
+--add-modules javafx.controls,javafx.fxml --add-modules javafx.controls,javafx.media
+-jar Galaxy-Shooter.jar
