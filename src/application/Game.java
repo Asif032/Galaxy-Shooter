@@ -66,10 +66,10 @@ public class Game {
     Background background = new Background(bImg);
     root.setBackground(background);
     
-    File f = new File("src/sounds/music.wav");
-    media = new Media(f.toURI().toString());
-    mediaPlayer = new MediaPlayer(media);
-    mediaPlayer.play();
+//    File f = new File("src/sounds/music.wav");
+//    media = new Media(f.toURI().toString());
+//    mediaPlayer = new MediaPlayer(media);
+//    mediaPlayer.play();
     
     scene = new Scene(createContent());
     stage.setScene(scene);
@@ -96,7 +96,7 @@ public class Game {
           update();
         } else if (win || gameOver) {
           stop();
-          mediaPlayer.stop();
+//          mediaPlayer.stop();
           String message = "YOU";
           message += win ? " WIN!" : " LOSE!";
           try {
@@ -143,9 +143,9 @@ public class Game {
   
   public void update() {
     
-    if (bgMusic) {
-      mediaPlayer.play();
-    }
+//    if (bgMusic) {
+//      mediaPlayer.play();
+//    }
     
     int y = level == 0 ? 2 : level + 1;
     t += 0.032 * y;
